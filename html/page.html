@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khiêm Lặt Vặt - Hệ Thống Cửa Hàng Nội Thất Cao Cấp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- HEADER --- */
+        .main-header {
+            background-color: #ffffff;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 55px;
+            object-fit: contain;
+        }
+
+        .search-bar {
+            display: flex;
+            width: 40%;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #ffcc00;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-bar button {
+            padding: 0 20px;
+            background-color: #ffcc00;
+            border: 2px solid #ffcc00;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .header-info {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-item i {
+            font-size: 22px;
+            color: #444;
+        }
+
+        .info-item span {
+            display: block;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .info-item strong {
+            color: #d32f2f;
+            font-size: 14px;
+        }
+
+        /* Giỏ hàng hiển thị số lượng */
+        .cart-item {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .cart-item i {
+            font-size: 24px;
+            color: #333;
+        }
+
+        #cartCount {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: #d32f2f;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 50%;
+        }
+
+        /* --- NAVBAR & DROPDOWN --- */
+        .navbar {
+            background-color: #ffcc00;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-category {
+            background-color: #000000;
+            color: #fff;
+            padding: 15px 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            color: #333;
+            width: 215px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            list-style: none;
+            z-index: 999;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #f9f9f9;
+            color: #ffcc00;
+        }
+
+        .nav-category:hover .dropdown-menu {
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            padding-left: 20px;
+            gap: 20px;
+        }
+
+        .nav-links li a {
+            color: #000;
+        }
+
+        /* --- MAIN CONTENTS --- */
+        .store-title {
+            text-align: center;
+            margin: 35px 0 20px;
+        }
+
+        .store-title h2 {
+            font-size: 18px;
+            color: #222;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Lưới hiển thị 5 sản phẩm */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            background-color: #ddd; 
+            border: 1px solid #ddd;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            padding: 25px 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+            z-index: 5;
+        }
+
+        .product-img {
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .product-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .product-card h3 {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.4;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* CSS kiểu dáng cho giá tiền sản phẩm */
+        .product-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: #d32f2f;
+            margin: 8px 0 15px 0;
+        }
+
+        /* Nút thêm vào giỏ hàng */
+        .btn-add-cart {
+            background-color: #ffcc00;
+            color: #000;
+            border: none;
+            padding: 8px 12px;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        .btn-add-cart:hover {
+            background-color: #e6b800;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .products-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 650px) {
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .header-wrapper { flex-direction: column; gap: 10px; }
+            .search-bar { width: 100%; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container header-wrapper">
+            <div class="logo">
+                <a href="#"><img src="../assets/images/logokhiem.png" alt="Logo Khiêm Lặt Vặt"></a>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm...">
+                <button type="button" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            
+            <div class="header-info">
+                <div class="info-item">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <div>
+                        <span>Gọi mua hàng</span>
+                        <strong>0358 290 600</strong>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <span>Hệ thống</span>
+                        <strong>Cửa hàng</strong>
+                    </div>
+                </div>
+                <div class="info-item cart-item">
+                    <i class="fa-solid fa-basket-shopping"></i>
+                    <span id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="container nav-wrapper">
+            <div class="nav-category">
+                <i class="fa-solid fa-bars"></i> DANH MỤC SẢN PHẨM <i class="fa-solid fa-chevron-down"></i>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Kiến Thức Nội Thất</a></li>
+                    <li><a href="#">Kinh Nghiệm</a></li>
+                    <li><a href="#">Thương Hiệu Uy Tín</a></li>
+                </ul>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#"><i class="fa-solid fa-money-bill-wave"></i> Chính Sách Thanh Toán</a></li>
+                <li><a href="#"><i class="fa-solid fa-shield-halved"></i> Chính Sách Bảo Hành</a></li>
+                <li><a href="#"><i class="fa-solid fa-truck-ramp-box"></i> Chính Sách Đổi Trả</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="store-title">
+            <h2>HỆ THỐNG CỬA HÀNG NỘI THẤT KHIÊM LẶT VẶT | CAO CẤP, NHẬP KHẨU</h2>
+        </section>
+
+        <section class="products-grid" id="productsGrid">
+            
+            <div class="product-card" data-name="sofa phong khach">
+                <div class="product-img">
+                    <img src="../assets/images/e3db67c6ef026e5c3713.jpg" alt="Sofa Phòng Khách">
+                </div>
+                <h3>SOFA PHÒNG KHÁCH</h3>
+                <div class="product-price">17.550.000 đ</div>
+                <button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button>
+            </div>
+
+            <div class="product-card" data-name="ban an">
+                <div class="product-img">
+                    <img src="../assets/images/33efb1f23936b868e127.jpg" alt="Bàn Ăn">
+                </div>
+                <h3>BÀN ĂN</h3>
+                <div class="product-price">17.900.000 đ</div>
+                <button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button>
+            </div>
+
+            <div class="product-card" data-name="giuong tu">
+                <div class="product-img">
+                    <img src="../assets/images/21159564253_1258003513.600x600.jpg" alt="Giường Tủ">
+                </div>
+                <h3>GIƯỜNG TỦ</h3>
+                <div class="product-price">5.350.000 đ</div>
+                <button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button>
+            </div>
+
+            <div class="product-card" data-name="ban sofa">
+                <div class="product-img">
+                    <img src="../assets/images/b1bf2fa2a76626387f77.jpg" alt="Bàn Sofa">
+                </div>
+                <h3>BÀN SOFA</h3>
+                <div class="product-price">14.900.000 đ</div>
+                <button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button>
+            </div>
+
+            <div class="product-card" data-name="sofa da bo y nhap khau">
+                <div class="product-img">
+                    <img src="../assets/images/be2a3d37b5f334ad6de2.jpg" alt="Sofa Da Bò Ý Nhập Khẩu">
+                </div>
+                <h3>SOFA DA BÒ Ý NHẬP KHẨU</h3>
+                <div class="product-price">26.500.000 đ</div>
+                <button class="btn-add-cart">THÊM VÀO GIỎ HÀNG</button>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 1. CHỨC NĂNG TÌM KIẾM
+            const searchInput = document.getElementById("searchInput");
+            const searchBtn = document.getElementById("searchBtn");
+            const productCards = document.querySelectorAll(".product-card");
+
+            function filterProducts() {
+                const query = searchInput.value.toLowerCase().trim();
+
+                productCards.forEach(card => {
+                    const productName = card.getAttribute("data-name") || "";
+                    if (productName.includes(query)) {
+                        card.style.display = "flex"; 
+                    } else {
+                        card.style.display = "none"; 
+                    }
+                });
+            }
+
+            if (searchInput) searchInput.addEventListener("keyup", filterProducts);
+            if (searchBtn) searchBtn.addEventListener("click", filterProducts);
+
+            // 2. CHỨC NĂNG THÊM VÀO GIỎ HÀNG
+            let currentCartCount = 0;
+            const cartCountBadge = document.getElementById("cartCount");
+            const addCartButtons = document.querySelectorAll(".btn-add-cart");
+
+            addCartButtons.forEach(button => {
+                button.addEventListener("click", function (event) {
+                    event.stopPropagation();
+                    currentCartCount++;
+                    cartCountBadge.textContent = currentCartCount;
+                    alert("Đã thêm sản phẩm vào giỏ hàng thành công!");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
