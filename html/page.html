@@ -101,6 +101,130 @@
             font-size: 14px;
         }
 
+        /* User Account Section */
+        .user-account {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .user-icon i {
+            font-size: 24px;
+            color: #333;
+            transition: color 0.2s ease;
+        }
+
+        .user-icon:hover i {
+            color: #ffcc00;
+        }
+
+        .user-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            z-index: 1000;
+            margin-top: 8px;
+        }
+
+        .user-menu.active {
+            display: block;
+        }
+
+        .user-menu-header {
+            padding: 16px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .user-menu-header p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .user-menu-header strong {
+            display: block;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .user-menu-items {
+            list-style: none;
+            padding: 8px 0;
+        }
+
+        .user-menu-items li {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .user-menu-items li:last-child {
+            border-bottom: none;
+        }
+
+        .user-menu-items a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            color: #333;
+            transition: background 0.2s ease;
+        }
+
+        .user-menu-items a:hover {
+            background: #f5f5f5;
+            color: #ffcc00;
+        }
+
+        .user-menu-items i {
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .btn-auth {
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-login {
+            background: white;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .btn-login:hover {
+            border-color: #ffcc00;
+            background: #fefef8;
+        }
+
+        .btn-register {
+            background: #ffcc00;
+            color: #000;
+        }
+
+        .btn-register:hover {
+            background: #e6b800;
+        }
+
         /* Giỏ hàng hiển thị số lượng */
         .cart-item {
             position: relative;
@@ -502,6 +626,244 @@
             font-size: 14px;
         }
 
+        /* --- MODAL AUTH --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .modal-header h2 {
+            font-size: 24px;
+            margin-bottom: 6px;
+            font-weight: 800;
+        }
+
+        .modal-header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #333;
+            font-size: 13px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 11px 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 13px;
+            transition: border-color 0.2s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #667eea;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 18px;
+        }
+
+        .remember-forgot a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .remember-forgot a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-modal-auth {
+            width: 100%;
+            padding: 12px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-modal-auth:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .form-divider {
+            display: flex;
+            align-items: center;
+            margin: 16px 0;
+            color: #999;
+            font-size: 12px;
+        }
+
+        .form-divider::before,
+        .form-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .form-divider span {
+            margin: 0 10px;
+        }
+
+        .modal-footer {
+            text-align: center;
+            padding-top: 12px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .modal-footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Tab toggle */
+        .modal-tabs {
+            display: flex;
+            gap: 0;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-tab {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .modal-tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .modal-tab-content {
+            display: none;
+        }
+
+        .modal-tab-content.active {
+            display: block;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .products-grid { grid-template-columns: repeat(2, 1fr); }
@@ -545,6 +907,25 @@
                 <div class="info-item cart-item">
                     <i class="fa-solid fa-basket-shopping"></i>
                     <span id="cartCount">0</span>
+                </div>
+
+                <!-- User Account Section -->
+                <div class="user-account">
+                    <div class="user-icon" id="userIconToggle">
+                        <i class="fa-solid fa-circle-user"></i>
+                        <div class="user-menu" id="userMenu">
+                            <div class="user-menu-header" id="userMenuHeader">
+                                <p>Tài khoản của tôi</p>
+                                <strong id="userName">Khách</strong>
+                            </div>
+                            <ul class="user-menu-items" id="userMenuItems">
+                                <!-- Items will be populated by JS -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="auth-buttons" id="authButtons">
+                        <!-- Auth buttons will be populated by JS -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -652,6 +1033,99 @@
             <div class="footer-note">© 2026 Khiêm Lặt Vặt. Bản quyền nội dung thuộc về cửa hàng.</div>
         </div>
     </footer>
+
+    <!-- Modal Auth -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeAuthModal()">×</button>
+                <h2>Khiêm Lặt Vặt</h2>
+                <p>Hệ thống cửa hàng nội thất cao cấp</p>
+            </div>
+
+            <div class="modal-body">
+                <!-- Tab buttons -->
+                <div class="modal-tabs">
+                    <button class="modal-tab active" data-tab="login" onclick="switchTab('login')">Đăng Nhập</button>
+                    <button class="modal-tab" data-tab="register" onclick="switchTab('register')">Đăng Kí</button>
+                </div>
+
+                <!-- Login Tab -->
+                <div id="login-tab" class="modal-tab-content active">
+                    <form id="loginFormModal" onsubmit="handleLoginModal(event)">
+                        <div class="form-group">
+                            <label for="loginEmail">Email hoặc Số điện thoại</label>
+                            <input type="text" id="loginEmail" required placeholder="Nhập email hoặc số điện thoại">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loginPassword">Mật khẩu</label>
+                            <input type="password" id="loginPassword" required placeholder="Nhập mật khẩu">
+                        </div>
+
+                        <div class="remember-forgot">
+                            <label style="font-size: 12px;">
+                                <input type="checkbox"> Ghi nhớ tôi
+                            </label>
+                            <a href="#">Quên mật khẩu?</a>
+                        </div>
+
+                        <button type="submit" class="btn-modal-auth">Đăng Nhập</button>
+                    </form>
+                </div>
+
+                <!-- Register Tab -->
+                <div id="register-tab" class="modal-tab-content">
+                    <form id="registerFormModal" onsubmit="handleRegisterModal(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="regFirstName">Họ</label>
+                                <input type="text" id="regFirstName" required placeholder="Họ">
+                            </div>
+                            <div class="form-group">
+                                <label for="regLastName">Tên</label>
+                                <input type="text" id="regLastName" required placeholder="Tên">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regEmail">Email</label>
+                            <input type="email" id="regEmail" required placeholder="Email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regPhone">Số điện thoại</label>
+                            <input type="tel" id="regPhone" required placeholder="Số điện thoại">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regPassword">Mật khẩu</label>
+                            <input type="password" id="regPassword" required placeholder="Ít nhất 8 ký tự">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="regConfirmPassword">Xác nhận mật khẩu</label>
+                            <input type="password" id="regConfirmPassword" required placeholder="Xác nhận mật khẩu">
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <label>
+                                <input type="checkbox" id="regTerms" required> Tôi đồng ý với điều khoản sử dụng
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-modal-auth">Đăng Kí</button>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <p style="margin-top: 16px; font-size: 12px;">
+                        Bạn có thể tiếp tục mua sắm. Hành động này sẽ được yêu cầu khi thanh toán.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="../js/lib.js"></script>
 </body>

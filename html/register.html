@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Kí - Khiêm Lặt Vặt</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .register-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .register-header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 40px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .register-header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .register-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .register-body {
+            padding: 40px 30px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #f5576c;
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        .password-hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+        }
+
+        .terms {
+            margin-bottom: 24px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .terms a {
+            color: #f5576c;
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        .terms input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+            margin-right: 6px;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 14px 0;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 16px;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-register:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 24px 0;
+            color: #999;
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .divider span {
+            margin: 0 12px;
+        }
+
+        .social-login {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .social-btn {
+            padding: 12px 0;
+            border: 1px solid #e0e0e0;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .social-btn:hover {
+            border-color: #f5576c;
+            background: #fff5f7;
+        }
+
+        .social-btn i {
+            margin-right: 6px;
+        }
+
+        .register-footer {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .register-footer a {
+            color: #f5576c;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .register-footer a:hover {
+            color: #f093fb;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .back-link a {
+            color: #f5576c;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+
+        .back-link a:hover {
+            color: #f093fb;
+        }
+
+        @media (max-width: 600px) {
+            .register-container {
+                border-radius: 12px;
+            }
+
+            .register-body {
+                padding: 30px 20px;
+            }
+
+            .register-header {
+                padding: 30px 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-header">
+            <h1>Khiêm Lặt Vặt</h1>
+            <p>Hệ thống cửa hàng nội thất cao cấp</p>
+        </div>
+
+        <div class="register-body">
+            <div class="back-link">
+                <a href="page.html"><i class="fa-solid fa-arrow-left"></i> Quay lại cửa hàng</a>
+            </div>
+
+            <h2 style="margin-bottom: 24px; color: #333; font-size: 24px;">Tạo Tài Khoản Mới</h2>
+
+            <form id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Họ</label>
+                        <input type="text" id="firstName" name="firstName" placeholder="Nhập họ" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Tên</label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Nhập tên" required>
+                    </div>
+                </div>
+
+                <div class="form-group form-row full">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Nhập email" required>
+                </div>
+
+                <div class="form-group form-row full">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" required>
+                </div>
+
+                <div class="form-group form-row full">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" placeholder="Mật khẩu (ít nhất 8 ký tự)" required>
+                    <div class="password-hint">Mật khẩu phải chứa chữ, số và ký tự đặc biệt</div>
+                </div>
+
+                <div class="form-group form-row full">
+                    <label for="confirmPassword">Xác nhận mật khẩu</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+                </div>
+
+                <div class="form-group form-row full">
+                    <label for="address">Địa chỉ</label>
+                    <input type="text" id="address" name="address" placeholder="Nhập địa chỉ" required>
+                </div>
+
+                <div class="form-group form-row full">
+                    <label for="city">Thành phố / Tỉnh</label>
+                    <select id="city" name="city" required>
+                        <option value="">-- Chọn thành phố --</option>
+                        <option>Hà Nội</option>
+                        <option>TP. Hồ Chí Minh</option>
+                        <option>Đà Nẵng</option>
+                        <option>Hải Phòng</option>
+                        <option>Khác</option>
+                    </select>
+                </div>
+
+                <div class="terms">
+                    <label>
+                        <input type="checkbox" id="agreeTerms" required>
+                        Tôi đồng ý với <a href="#">Điều khoản sử dụng</a> và <a href="#">Chính sách bảo mật</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-register">Đăng Kí</button>
+            </form>
+
+            <div class="divider">
+                <span>Hoặc</span>
+            </div>
+
+            <div class="social-login">
+                <button class="social-btn"><i class="fa-brands fa-google"></i> Google</button>
+                <button class="social-btn"><i class="fa-brands fa-facebook"></i> Facebook</button>
+            </div>
+
+            <div class="register-footer">
+                Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+
+            if (!firstName || !lastName || !email || !phone || !password || !confirmPassword || !address || !city) {
+                alert('Vui lòng nhập đầy đủ thông tin');
+                return;
+            }
+
+            if (password.length < 8) {
+                alert('Mật khẩu phải có ít nhất 8 ký tự');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert('Mật khẩu không trùng khớp');
+                return;
+            }
+
+            const fullName = firstName + ' ' + lastName;
+
+            // Lưu thông tin tài khoản vào localStorage
+            localStorage.setItem('user', JSON.stringify({
+                firstName: firstName,
+                lastName: lastName,
+                fullName: fullName,
+                email: email,
+                phone: phone,
+                address: address,
+                city: city,
+                isLoggedIn: true
+            }));
+
+            alert('Đăng kí thành công! Tài khoản của bạn đã được tạo.');
+            window.location.href = 'page.html';
+        });
+
+        // Xử lý nút đăng ký qua mạng xã hội
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Tính năng này sẽ được kích hoạt trong thời gian tới');
+            });
+        });
+    </script>
+</body>
+</html>
