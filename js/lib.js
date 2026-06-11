@@ -150,12 +150,49 @@ document.addEventListener("DOMContentLoaded", function () {
             .replace(/[^a-z0-9\-]/g, "");
     }
 
+    function normalizeText(text) {
+        const vietnameseMap = {
+            'à': 'a', 'á': 'a', 'ả': 'a', 'ã': 'a', 'ạ': 'a',
+            'ă': 'a', 'ằ': 'a', 'ắ': 'a', 'ẳ': 'a', 'ẵ': 'a', 'ặ': 'a',
+            'â': 'a', 'ầ': 'a', 'ấ': 'a', 'ẩ': 'a', 'ẫ': 'a', 'ậ': 'a',
+            'đ': 'd',
+            'è': 'e', 'é': 'e', 'ẻ': 'e', 'ẽ': 'e', 'ẹ': 'e',
+            'ê': 'e', 'ề': 'e', 'ế': 'e', 'ể': 'e', 'ễ': 'e', 'ệ': 'e',
+            'ì': 'i', 'í': 'i', 'ỉ': 'i', 'ĩ': 'i', 'ị': 'i',
+            'ò': 'o', 'ó': 'o', 'ỏ': 'o', 'õ': 'o', 'ọ': 'o',
+            'ô': 'o', 'ồ': 'o', 'ố': 'o', 'ổ': 'o', 'ỗ': 'o', 'ộ': 'o',
+            'ơ': 'o', 'ờ': 'o', 'ớ': 'o', 'ở': 'o', 'ỡ': 'o', 'ợ': 'o',
+            'ù': 'u', 'ú': 'u', 'ủ': 'u', 'ũ': 'u', 'ụ': 'u',
+            'ư': 'u', 'ừ': 'u', 'ứ': 'u', 'ử': 'u', 'ữ': 'u', 'ự': 'u',
+            'ỳ': 'y', 'ý': 'y', 'ỷ': 'y', 'ỹ': 'y', 'ỵ': 'y'
+        };
+
+        return text.toLowerCase()
+            .split('')
+            .map(char => vietnameseMap[char] || char)
+            .join('')
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
     if (searchInput) {
         function filterProducts() {
-            const query = searchInput.value.toLowerCase().trim();
+            const query = normalizeText(searchInput.value);
+            
+            if (query.length === 0) {
+                // Nếu tìm kiếm trống, hiển thị tất cả sản phẩm
+                productCards.forEach(card => {
+                    card.style.display = "flex";
+                });
+                return;
+            }
+
             productCards.forEach(card => {
-                const productName = card.getAttribute("data-name") || "";
-                card.style.display = productName.includes(query) ? "flex" : "none";
+                const productName = normalizeText(card.getAttribute("data-name") || "");
+                const productTitle = normalizeText(card.querySelector("h3")?.textContent || "");
+                
+                const isMatch = productName.includes(query) || productTitle.includes(query);
+                card.style.display = isMatch ? "flex" : "none";
             });
         }
 
