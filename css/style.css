@@ -226,6 +226,48 @@ a {
     line-height: 1.4;
 }
 
+.site-footer {
+    background-color: #222;
+    color: #f4f4f4;
+    padding: 25px 0;
+}
+
+.site-footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-brand {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.footer-links li a {
+    color: #f4f4f4;
+    font-size: 13px;
+}
+
+.footer-links li a:hover {
+    color: #ffcc00;
+}
+
+.footer-note {
+    font-size: 13px;
+    color: #ccc;
+}
+
 /* Responsive khi thu nhỏ màn hình */
 @media (max-width: 1024px) {
     .products-grid { grid-template-columns: repeat(3, 1fr); }

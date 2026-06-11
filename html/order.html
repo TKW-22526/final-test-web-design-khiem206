@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Hàng - Khiêm Lặt Vặt</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 0;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .main-header {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 18px 0;
+        }
+        .header-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        .header-logo img {
+            height: 55px;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #000;
+            font-weight: 700;
+        }
+        .back-link:hover {
+            color: #ffcc00;
+        }
+        .page-heading {
+            margin: 40px 0 20px;
+            text-align: center;
+        }
+        .page-heading h1 {
+            font-size: 28px;
+            color: #222;
+            margin-bottom: 10px;
+        }
+        .page-heading p {
+            color: #666;
+            line-height: 1.8;
+            max-width: 760px;
+            margin: 0 auto;
+            font-size: 15px;
+        }
+        .order-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 24px;
+            margin-top: 30px;
+        }
+        .order-card,
+        .summary-card {
+            background-color: #fff;
+            border: 1px solid #e4e4e4;
+            border-radius: 18px;
+            padding: 26px;
+            box-shadow: 0 16px 45px rgba(0,0,0,0.04);
+        }
+        .order-card h2,
+        .summary-card h2 {
+            font-size: 20px;
+            margin-bottom: 18px;
+            color: #222;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #444;
+            font-weight: 600;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            background: #fafafa;
+            font-size: 14px;
+            color: #333;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #ffcc00;
+            background: #fff;
+        }
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .order-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .btn-submit {
+            background-color: #ffcc00;
+            color: #000;
+            border: none;
+            padding: 14px 22px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            width: auto;
+        }
+        .btn-submit:hover {
+            background-color: #e6b800;
+        }
+        .note-box {
+            margin-top: 14px;
+            background-color: #fff8e1;
+            border: 1px solid #ffe29e;
+            border-radius: 12px;
+            padding: 16px;
+            color: #6d4c00;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #444;
+        }
+        .summary-item strong {
+            color: #222;
+        }
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .summary-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .summary-card li {
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            color: #555;
+        }
+        .summary-card li span:last-child {
+            font-weight: 700;
+            color: #222;
+        }
+        @media (max-width: 960px) {
+            .order-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-wrapper">
+            <div class="header-logo">
+                <a href="page.html"><img src="../assets/images/logokhiem.png" alt="Logo Khiêm Lặt Vặt"></a>
+            </div>
+            <a class="back-link" href="page.html"><i class="fa-solid fa-arrow-left"></i> Quay lại cửa hàng</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="page-heading">
+            <h1>Đặt hàng ngay</h1>
+            <p>Hoàn tất thông tin mua hàng để chúng tôi xử lý đơn hàng nhanh nhất. Vui lòng nhập chính xác địa chỉ giao hàng và số điện thoại để nhận hàng trong thời gian sớm nhất.</p>
+        </section>
+
+        <div class="order-grid">
+            <div class="order-card">
+                <h2>Thông tin đặt hàng</h2>
+                <div class="form-group">
+                    <label for="fullName">Họ và tên</label>
+                    <input type="text" id="fullName" placeholder="Nguyễn Văn A">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="tel" id="phone" placeholder="0358 290 600">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="example@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="address">Địa chỉ giao hàng</label>
+                    <textarea id="address" placeholder="Số nhà, đường, quận/huyện, thành phố"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="paymentMethod">Phương thức thanh toán</label>
+                    <select id="paymentMethod">
+                        <option>Thanh toán khi nhận hàng (COD)</option>
+                        <option>Chuyển khoản ngân hàng</option>
+                        <option>Thanh toán qua ví điện tử</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Ghi chú đơn hàng</label>
+                    <textarea id="notes" placeholder="Ghi chú cho người giao hàng"></textarea>
+                </div>
+                <div class="order-actions">
+                    <button class="btn-submit" type="button">Đặt hàng ngay</button>
+                    <div class="note-box">Nhân viên sẽ liên hệ lại qua số điện thoại sau khi nhận được yêu cầu. Vui lòng kiểm tra lại thông tin trước khi gửi.</div>
+                </div>
+            </div>
+
+            <aside class="summary-card">
+                <h2>Thông tin đơn hàng</h2>
+                <ul>
+                    <li><span>Ước tính số lượng</span><span>3 sản phẩm</span></li>
+                    <li><span>Giá sản phẩm</span><span>59.750.000 đ</span></li>
+                    <li><span>Phí giao hàng</span><span>120.000 đ</span></li>
+                    <li><span>Giảm giá</span><span>-500.000 đ</span></li>
+                </ul>
+                <div class="summary-total">
+                    <span>Tổng thanh toán</span>
+                    <strong>59.370.000 đ</strong>
+                </div>
+                <div class="note-box">Đơn hàng của bạn sẽ được xử lý ngay khi bạn nhấn nút đặt hàng. Hỗ trợ đổi trả theo chính sách cửa hàng.</div>
+            </aside>
+        </div>
+    </div>
+</body>
+</html>
